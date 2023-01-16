@@ -1,0 +1,45 @@
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+:root {
+    --blue: #24B4E1;
+    --white: #ffffff;
+    --lien : #4C004E;
+  }
+
+.loginPageBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+    max-height: 250px;
+    justify-content: space-around;
+
+}
+
+.inputAndLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divLogo{
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border-radius: 100px;
+    width:125px;
+    height:125px;
+}
+

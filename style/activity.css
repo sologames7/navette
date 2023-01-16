@@ -1,0 +1,68 @@
+body{
+    margin: 0;
+    margin-bottom: 100px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.enAttente{
+    background-color: rgb(217, 215, 215);
+}
+.accepte{
+    background-color: #6FDC3C;;
+}
+.refuse{
+    background-color: #F38E55;
+}
+
+.activityBody{
+    margin-bottom: 25px;
+    border-radius: 16px;
+    padding-top: 10px ;
+    padding-bottom: 20px ;
+    max-width: 300px;
+    width: 80vw;
+}
+h1{
+    text-decoration: underline;
+}
+h3{
+    text-decoration: underline;
+}
+
+.annule{
+    font-weight: bold;
+    color: white;
+    background-color: var(--red);
+    border: 0;
+    border-radius: 100px;
+    padding: 15px;
+
+}
+
+.petitBoutton{
+    border: 0;
+    padding: 10px;
+    border-radius: 100px;
+    color:white ;
+}
+
+.rouge{
+    background-color: var(--red);
+}
+
+.vert{
+    background-color: #6FDC3C;
+}
+
+.champTexte{
+    height: 30px;
+    border: 0;
+}
+
+form{
+    margin-bottom: 10px;
+}
