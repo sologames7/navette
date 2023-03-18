@@ -13,7 +13,7 @@ var con = mysql.createConnection({
   user: "root",
   password: "seninu618",
 });
-
+ 
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
@@ -28,7 +28,7 @@ app.use(bodyParser.json())
 const dummyDb = { subscription: null } //dummy in memory store
 
 const saveToDatabase = async (subscription, token) => {
-  console.log('token: ' +token)
+  console.log('saving user to database (token: ' +token)
   let subField = JSON.stringify(subscription)
   //VERIFIE SI L'UTILISATEUR A DEJA ETE INSCRIT
   let sqlVerif = `SELECT * FROM navette.userEndpoint WHERE userToken = '${token}'`
@@ -61,7 +61,7 @@ const saveToDatabase = async (subscription, token) => {
 app.post('/save-subscription', async (req, res) => {
   const subscription = req.body.sub
   const token = req.body.userToken
-  const dbSave = await saveToDatabase(subscription, token ) //Method to save the subscription to Database
+  await saveToDatabase(subscription, token ) //Method to save the subscription to Database
   res.json({ message: "Enregistré dans la base de données du serveur"})
 })
 
@@ -86,19 +86,31 @@ const sendNotification = (subscription, dataToSend) => {
 //route to test send notification
 app.post('/send-notification', (req, res) => {
   console.log('route \'/send-notification\' called');
+  let resList = []
   const subscriptions = req.body.tokenTable
+  const messageToDisplay = req.body.pushMessage
   subscriptions.forEach(usTok => {
       // On récup sur la db locale les endpoints
       // demande sql : select * from userEndpoint where userToken = usTok
-      const message = 'Vous avez une nouvelle activité'
-      sendNotification(dbRep, message) //dbRep: réponse de la db (endpoint) /!\ METTRE EN JSON.PARSE()
-  });
-  res.json({ message: 'notifications envoyées' })
+      let sqlQuerry = `SELECT * FROM navette.userEndpoint WHERE userToken = '${usTok}'`
+      con.query(sqlQuerry, function (err, result) {
+        if (err) throw err
+        if(JSON.stringify(result)!= '[]'){
+          for (let rowDbReponse = 0; rowDbReponse < result.length; rowDbReponse++) {
+            let userSubscription = JSON.parse(result[rowDbReponse].userEndpointStringify);
+            const message = messageToDisplay
+            sendNotification(userSubscription, message) //dbRep: réponse de la db (endpoint) /!\ METTRE EN JSON.PARSE()/
+          }
+        }
+        
+      });
+      res.json({ message: "notification(s) envoyé(s)" })
+    })
 })
 
 //RAJOUTE
 app.use('/', (req, res, next) => {
-    console.log('route \'/\' called')
+    console.log('route \'/\' called');
     res.json({ message: 'Hello from SSLserver' })
 })
 
@@ -107,4 +119,4 @@ const sslServer = https.createServer({
     cert: fs.readFileSync(path.join(__dirname,'cert', 'cert.pem'))
 }, app)
 
-sslServer.listen(3443, () => console.log('Secure server on port 3443'))
+sslServer.listen(3443, () => console.log('Secure server on port 3443 v2.1.1'))
