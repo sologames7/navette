@@ -50,7 +50,6 @@ if(isset($_POST["cancelActivity"])){
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/activity.css">
-
 </head>
 <body>
     <div class="navbar">
