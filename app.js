@@ -59,10 +59,15 @@ const saveToDatabase = async (subscription, token) => {
 
 // The new /save-subscription endpoint
 app.post('/save-subscription', async (req, res) => {
-  const subscription = req.body.sub
-  const token = req.body.userToken
-  await saveToDatabase(subscription, token ) //Method to save the subscription to Database
-  res.json({ message: "Enregistré dans la base de données du serveur"})
+  try {
+    const subscription = req.body.sub
+    const token = req.body.userToken
+    await saveToDatabase(subscription, token ) //Method to save the subscription to Database
+    res.json({ message: "Enregistré dans la base de données du serveur"})
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 })
 
 const vapidKeys = {
@@ -85,27 +90,31 @@ const sendNotification = (subscription, dataToSend) => {
  
 //route to test send notification
 app.post('/send-notification', (req, res) => {
-  console.log('route \'/send-notification\' called');
-  let resList = []
-  const subscriptions = req.body.tokenTable
-  const messageToDisplay = req.body.pushMessage
-  subscriptions.forEach(usTok => {
-      // On récup sur la db locale les endpoints
-      // demande sql : select * from userEndpoint where userToken = usTok
-      let sqlQuerry = `SELECT * FROM navette.userEndpoint WHERE userToken = '${usTok}'`
-      con.query(sqlQuerry, function (err, result) {
-        if (err) throw err
-        if(JSON.stringify(result)!= '[]'){
-          for (let rowDbReponse = 0; rowDbReponse < result.length; rowDbReponse++) {
-            let userSubscription = JSON.parse(result[rowDbReponse].userEndpointStringify);
-            const message = messageToDisplay
-            sendNotification(userSubscription, message) //dbRep: réponse de la db (endpoint) /!\ METTRE EN JSON.PARSE()/
+  try{
+    console.log('route \'/send-notification\' called');
+    let resList = []
+    const subscriptions = req.body.tokenTable
+    const messageToDisplay = req.body.pushMessage
+    subscriptions.forEach(usTok => {
+        // On récup sur la db locale les endpoints
+        // demande sql : select * from userEndpoint where userToken = usTok
+        let sqlQuerry = `SELECT * FROM navette.userEndpoint WHERE userToken = '${usTok}'`
+        con.query(sqlQuerry, function (err, result) {
+          if (err) throw err
+          if(JSON.stringify(result)!= '[]'){
+            for (let rowDbReponse = 0; rowDbReponse < result.length; rowDbReponse++) {
+              let userSubscription = JSON.parse(result[rowDbReponse].userEndpointStringify);
+              const message = messageToDisplay
+              sendNotification(userSubscription, message) //dbRep: réponse de la db (endpoint) /!\ METTRE EN JSON.PARSE()/
+            }
           }
-        }
-        
-      });
-      res.json({ message: "notification(s) envoyé(s)" })
-    })
+        });
+        res.json({ message: "notification(s) envoyé(s)" })
+      })
+  } catch (error) { 
+    console.log(error);
+    next(error);
+  }
 })
 
 //RAJOUTE
@@ -119,4 +128,4 @@ const sslServer = https.createServer({
     cert: fs.readFileSync(path.join(__dirname,'cert', 'cert.pem'))
 }, app)
 
-sslServer.listen(3443, () => console.log('Secure server on port 3443 v2.1.1'))
+sslServer.listen(3443, () => console.log("Secure server on port 3443 v3.0.0 'no crash' "))
