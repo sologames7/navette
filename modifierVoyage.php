@@ -95,10 +95,5 @@ if(isset($_POST["voyageModification"])){
         <input class="button" type="submit" value="Modifier voyage" name="voyageModification">
 
     </form>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
 </body>
 </html>

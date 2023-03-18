@@ -80,10 +80,6 @@ if (isset($_GET["token"]))
         }
     ?>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
+    
 </body>
 </html>

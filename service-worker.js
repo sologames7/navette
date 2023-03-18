@@ -2,13 +2,11 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js');
 
 const tokenUser = new URL(location).searchParams.get('tokenUser');
-console.log(new URL(location));
-console.log('tokenUser from profil page:', tokenUser)
-
 workbox.routing.registerRoute(
     ({request}) => request.destination === 'image',
     new workbox.strategies.NetworkFirst()
 )
+console.log("service-worker registration");
 
 
 

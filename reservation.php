@@ -69,10 +69,5 @@ if( $already){
             <input class="button sub" type="submit" value="reserver" name="demande">
         </form>
     </div>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
 </body>
 </html>

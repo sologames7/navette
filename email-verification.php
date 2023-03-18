@@ -49,10 +49,5 @@ include_once('function/dbConnect.php');
     
         <input class="button" type="submit" name="verify_email" value="Vérifier Email">
     </form>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
 </body>
 </html>

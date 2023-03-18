@@ -42,7 +42,7 @@ if(isset($_POST["sentHide"])){
             </form>
 
             <!-- BOUTON DE NOTIFS -->
-            <button class="button buttonGap" id="permission-btn" onclick="main()">Autoriser notifications</button>
+            <button class="button buttonGap" id="permission-btn" onclick="main()">Activer notifications</button>
             <!-- <button class="button buttonGap" id="delete-permission-btn" onclick="desactivation()">Désactiver notifications</button> -->
             <!--  -->
 

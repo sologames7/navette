@@ -51,10 +51,5 @@ if(isset($_POST["oldPassword"])){
             ?>
             <input class="button" type="submit" value="valider">
     </form>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
 </body>
 </html>

@@ -10,11 +10,21 @@
 </head>
 <body>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
+        const registerServiceWorkerAndRedirect = async () => {
+            if ('serviceWorker' in navigator) {
+                await navigator.serviceWorker.register('/service-worker.js');
+            }
+            window.location.href= "loginPage.php";
         }
 
-        window.location.href= "loginPage.php";
+
+        navigator.serviceWorker.getRegistration().then(function(registration) {
+            if (!registration) {
+                registerServiceWorkerAndRedirect()
+            }else{
+                window.location.href= "loginPage.php";
+            }
+        });
     </script>
 </body>
 </html>

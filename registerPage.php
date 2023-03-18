@@ -174,10 +174,5 @@ include_once('function/dbConnect.php');
         </form>
     
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
 </body>
 </html>

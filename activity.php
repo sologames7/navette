@@ -70,10 +70,5 @@ if(isset($_POST["cancelActivity"])){
         }
         ?>
     </div>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
 </body>
 </html>
