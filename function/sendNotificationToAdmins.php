@@ -19,6 +19,11 @@
                 print "Error!: " . $e->getMessage() . "<br/>";
                 die();
             }
+        var_dump($tokenTable);
+        $tokenTable = json_encode($tokenTable);
+
+
+        
         echo "<script>
             const sendNotificationRequest = async (tokenTable, pushMessage) => {  const response = await fetch('https://425c94f.online-server.cloud:3443/send-notification', {
                 method: 'post',
@@ -35,7 +40,7 @@
                 }
          </script>";
         $jscode = "sendNotificationRequest($tokenTable ,$pushMessage)";
-        echo "<script>eval($jscode);</script>";
+        echo "<script>$jscode</script>";
     }
 
 ?>

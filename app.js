@@ -16,7 +16,7 @@ var con = mysql.createConnection({
  
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected!");
+  console.log("DB Connected!");
 });
 
 
@@ -90,9 +90,8 @@ const sendNotification = (subscription, dataToSend) => {
  
 //route to test send notification
 app.post('/send-notification', (req, res) => {
+  console.log('route \'/send-notification\' called');
   try{
-    console.log('route \'/send-notification\' called');
-    let resList = []
     const subscriptions = req.body.tokenTable
     const messageToDisplay = req.body.pushMessage
     subscriptions.forEach(usTok => {
@@ -128,4 +127,4 @@ const sslServer = https.createServer({
     cert: fs.readFileSync(path.join(__dirname,'cert', 'cert.pem'))
 }, app)
 
-sslServer.listen(3443, () => console.log("Secure server on port 3443 v3.0.0 'no crash' "))
+sslServer.listen(3443, () => console.log("Secure server on port 3443 v3.0.3 'no crash' "))
