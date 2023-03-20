@@ -19,8 +19,8 @@
                 print "Error!: " . $e->getMessage() . "<br/>";
                 die();
             }
-        var_dump($tokenTable);
         $tokenTable = json_encode($tokenTable);
+
 
 
         
@@ -39,7 +39,7 @@
                 console.log(data)
                 }
          </script>";
-        $jscode = "sendNotificationRequest($tokenTable ,$pushMessage)";
+        $jscode = "sendNotificationRequest($tokenTable ,'$pushMessage')";
         echo "<script>$jscode</script>";
     }
 

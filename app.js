@@ -66,7 +66,6 @@ app.post('/save-subscription', async (req, res) => {
     res.json({ message: "Enregistré dans la base de données du serveur"})
   } catch (error) {
     console.log(error);
-    next(error);
   }
 })
 
@@ -84,8 +83,15 @@ webpush.setVapidDetails(
 )
 
 //function to send the notification to the subscribed device
-const sendNotification = (subscription, dataToSend) => {
-  webpush.sendNotification(subscription, dataToSend)
+const sendNotification = (subscription, dataToSend, userToken) => {
+  
+    webpush.sendNotification(subscription, dataToSend)
+    .then((result) => {
+      console.log('Notification sent successfully, token: ', userToken)
+    })
+    .catch((err) => {
+      console.log('err from webpush for token : ', userToken)
+    })
 }
  
 //route to test send notification
@@ -94,29 +100,34 @@ app.post('/send-notification', (req, res) => {
   try{
     const subscriptions = req.body.tokenTable
     const messageToDisplay = req.body.pushMessage
+    let responseSent = false
     subscriptions.forEach(usTok => {
         // On récup sur la db locale les endpoints
         // demande sql : select * from userEndpoint where userToken = usTok
         let sqlQuerry = `SELECT * FROM navette.userEndpoint WHERE userToken = '${usTok}'`
         con.query(sqlQuerry, function (err, result) {
-          if (err) throw err
+          if (err) console.log(err);
           if(JSON.stringify(result)!= '[]'){
             for (let rowDbReponse = 0; rowDbReponse < result.length; rowDbReponse++) {
               let userSubscription = JSON.parse(result[rowDbReponse].userEndpointStringify);
               const message = messageToDisplay
-              sendNotification(userSubscription, message) //dbRep: réponse de la db (endpoint) /!\ METTRE EN JSON.PARSE()/
-            }
+              
+              sendNotification(userSubscription, message, usTok) //dbRep: réponse de la db (endpoint) /!\ METTRE EN JSON.PARSE()/
+              
           }
+        }
         });
-        res.json({ message: "notification(s) envoyé(s)" })
+        if(!responseSent){
+          res.json({ message: "notification(s) envoyé(s)" })
+          responseSent = true
+        }
       })
   } catch (error) { 
     console.log(error);
-    next(error);
   }
 })
 
-//RAJOUTE
+//RAJOUTE 
 app.use('/', (req, res, next) => {
     console.log('route \'/\' called');
     res.json({ message: 'Hello from SSLserver' })
@@ -127,4 +138,4 @@ const sslServer = https.createServer({
     cert: fs.readFileSync(path.join(__dirname,'cert', 'cert.pem'))
 }, app)
 
-sslServer.listen(3443, () => console.log("Secure server on port 3443 v3.0.3 'no crash' "))
+sslServer.listen(3443, () => console.log("Secure server on port 3443 v3.3.0 'no crash' "))
