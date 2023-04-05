@@ -16,15 +16,6 @@
             }
             window.location.href= "loginPage.php";
         }
-
-
-        navigator.serviceWorker.getRegistration().then(function(registration) {
-            if (!registration) {
-                registerServiceWorkerAndRedirect()
-            }else{
-                window.location.href= "loginPage.php";
-            }
-        });
     </script>
 </body>
 </html>
