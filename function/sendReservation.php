@@ -1,7 +1,6 @@
 <?php
 include_once('function/dbConnect.php');
 include_once('function/getTravelById.php');
-include_once('function/sendNotificationToAdmins.php');
 
 function sendReservation($array){
     $personnes = $array["nombreDePersonne"];
@@ -15,7 +14,6 @@ function sendReservation($array){
     $sql = "INSERT INTO `activite` (`ac_nb_pers`, `ac_user_token`, `ac_message`,`ac_travel_id`, `ac_date`, `ac_heure`) VALUES (:personnes, :token,:message, :travelId, :travelDate, :travelHour)";
     $stmt = $bdd1->prepare($sql);
     $stmt->execute(['personnes' => $personnes, 'token' => $token , 'message' => $message , 'travelId' => $travelId, 'travelDate' => $travel[0]["ag_date"], 'travelHour' => $travel[0]["ag_heure"]]);
-    sendNotificationToAdmins("Nous avons une nouvelle demande de réservation pour le trajet du {$travel[0]['ag_date']} à {$travel[0]['ag_heure']}");
     return true;
 
     } catch (PDOException $e) {
