@@ -1,18 +1,3 @@
-<?php
-include_once('function/isAdmin.php');
-include_once('function/getUserInfoByToken.php');
-
-if(isset($_COOKIE["LOGGED_USER"])){
-    $isAdmin = isAdmin($_COOKIE["LOGGED_USER"]);
-    $userInfo = getUserInfoByToken($_COOKIE["LOGGED_USER"]);
-}else{
-    header('Location:loginPage.php');
-}
-
-if(isset($_POST["sentHide"])){
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,6 +11,30 @@ if(isset($_POST["sentHide"])){
     <link rel="stylesheet" href="style/profil.css">
     <script type="module" src="firebase.js"></script>
 </head>
+
+<?php
+include_once('function/isAdmin.php');
+include_once('function/getUserInfoByToken.php');
+include_once('function/dbConnect.php');
+
+if(isset($_COOKIE["LOGGED_USER"])){
+    $isAdmin = isAdmin($_COOKIE["LOGGED_USER"]);
+    $userInfo = getUserInfoByToken($_COOKIE["LOGGED_USER"]);
+}else{
+    header('Location:loginPage.php');
+}
+
+if(isset($_COOKIE["firebaseToken"])){
+    $firebaseToken = $_COOKIE["firebaseToken"];
+    $bdd = dbConnect();
+    $req = $bdd->prepare("UPDATE user SET us_firebase_token = ? WHERE us_token = ?");
+    $stmt->execute(array($firebaseToken, $_COOKIE["LOGGED_USER"]));
+}
+
+if(isset($_POST["sentHide"])){
+}
+?>
+
 <body>
     <div class="navbar">
         <a class="navButton" href="./activity.php"><img src="assets/book.png" alt="activity icon"></a>
@@ -43,7 +52,7 @@ if(isset($_POST["sentHide"])){
             </form>
 
             <!-- BOUTON DE NOTIFS -->
-            <button class="button buttonGap" id="permission-btn" onclick="main()">Activer notifications</button>
+            <button class="button buttonGap" id="permission-btn">Activer notifications</button>
             <!--  -->
 
             <form method="get" action="loginPage.php">
@@ -54,6 +63,6 @@ if(isset($_POST["sentHide"])){
     </div>
 
     
-    <script src="index.js"></script>
+    <script src="profil.js"></script>
 </body>
 </html>

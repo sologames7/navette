@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/reserver.css">
+    <script type="module" src="firebase.js"></script>
+</head>
+
 <?php
 include_once('function/getTravelById.php');
 include_once('function/sendReservation.php');
@@ -33,19 +47,7 @@ if( $already){
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style/global.css">
-    <link rel="stylesheet" href="style/reserver.css">
-    <script type="module" src="firebase.js"></script>
-</head>
+
 <body>
     <div class="navbar">
         <a class="navButton" href="./activity.php"><img src="assets/book.png" alt="activity icon"></a>

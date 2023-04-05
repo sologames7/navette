@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navette</title>
+    <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/activity.css">
+    <script type="module" src="firebase.js"></script>
+
+</head>
+
 <?php
 include_once('function/isAdmin.php');
 include_once('function/getUserActivity.php');
@@ -39,20 +54,7 @@ if(isset($_POST["cancelActivity"])){
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navette</title>
-    <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style/global.css">
-    <link rel="stylesheet" href="style/activity.css">
-    <script type="module" src="firebase.js"></script>
 
-</head>
 <body>
     <div class="navbar">
         <a class="navButton" href="./activity.php"><img src="assets/bookB.png" alt="activity icon"></a>
