@@ -90,11 +90,7 @@ include_once('function/dbConnect.php');
             $mail->Body    = '<p>Votre code de vérification est: <b style="font-size: 30px;">' . $verification_code . '</b></p>';
  
             $mail->send();
-            // echo 'Message has been sent';
- 
-            // connect with database
-
-            // insert in users table
+            
             try {
                 $bdd = dbConnect();
                 $token = bin2hex(openssl_random_pseudo_bytes(16));

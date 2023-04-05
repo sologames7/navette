@@ -44,6 +44,7 @@ if( $already){
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/reserver.css">
+    <script src="firebase.js"></script>
 </head>
 <body>
     <div class="navbar">

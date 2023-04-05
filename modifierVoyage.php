@@ -47,6 +47,7 @@ if(isset($_POST["voyageModification"])){
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/modifierVoyage.css">
+    <script src="firebase.js"></script>
 </head>
 <body>
     <div class="navbar">

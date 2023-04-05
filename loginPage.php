@@ -42,7 +42,7 @@ include_once('function/dbConnect.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Navette</title>
     <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style/login.css">

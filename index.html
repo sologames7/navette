@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
     <link rel="manifest" href="manifest.json">
-    <title>Document</title>
+    <title>Navette</title>
+    <script src="firebase.js"></script>
 </head>
 <body>
     <script>
@@ -16,6 +17,7 @@
             }
             window.location.href= "loginPage.php";
         }
+        registerServiceWorkerAndRedirect();
     </script>
 </body>
 </html>
