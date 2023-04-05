@@ -24,6 +24,7 @@ if(isset($_POST["sentHide"])){
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/profil.css">
+    <script src="firebase.js"></script>
 </head>
 <body>
     <div class="navbar">
