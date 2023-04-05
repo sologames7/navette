@@ -54,7 +54,7 @@ if (isset($_GET["token"]))
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/home.css">
-    <script src="firebase.js"></script>
+    <script type="module" src="firebase.js"></script>
 </head>
 <body>
     <div class="navbar">
