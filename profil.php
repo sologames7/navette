@@ -63,6 +63,6 @@ if(isset($_POST["sentHide"])){
     </div>
 
     
-    <script src="profil.js"></script>
+    <script type="module" src="profil.js"></script>
 </body>
 </html>
